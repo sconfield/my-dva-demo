@@ -1,12 +1,22 @@
 import React from 'react';
 import styles from './CounterComponent.css';
 
-function CounterComponent() {
+import { connect } from 'dva';
+
+function CounterComponent({ dispatch, count }) {
   return (
     <div className={styles.normal}>
-      Component: CounterComponent
+      <h3>Component: CounterComponent { count } </h3>
+      <button key="add" onClick={() => { dispatch({type: 'counter/add'})}}>+</button>
+      <button key="minus" onClick={() => { dispatch({type: 'counter/minus'})}}>-</button>
     </div>
   );
 }
 
-export default CounterComponent;
+function mapStateToProps(state) {
+  return {
+    count: state.counter.count
+  };
+}
+
+export default connect(mapStateToProps)(CounterComponent);
