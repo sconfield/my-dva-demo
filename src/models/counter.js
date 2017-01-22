@@ -1,4 +1,5 @@
 import request from '../utils/request.js';
+import key from 'keymaster';
 
 const delay = timeout => {
   return new Promise(resolve => {
@@ -50,7 +51,8 @@ export default {
   effects: {
     *add(action, { put, call }) {
       if (typeof action.count === 'number') {
-        const { data } = yield call(()=>(request(`http://localhost:8000/api/users/${action.count}`)));
+        const url = `http://localhost:8000/api/users/${action.count}`;
+        const { data } = yield call(()=>(request(url)));
         yield put({ type: 'showUser', ...data });
       }
     },
@@ -59,5 +61,11 @@ export default {
       yield put({ type: 'add' })
     }
   },
-  subscriptions: {},
+  // TODO: how to get the state?
+  subscriptions: {
+    keyboardWatcher({ dispatch }) {
+      key('up', () => { dispatch({ type:'add', count: 6 }) });
+      key('down', () => { dispatch({ type:'minus' }) });
+    }
+  },
 };
