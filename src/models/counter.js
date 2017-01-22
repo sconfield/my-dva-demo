@@ -1,13 +1,22 @@
+import request from '../utils/request.js';
+
 const delay = timeout => {
   return new Promise(resolve => {
-    setTimeout(resolve, timeout);
+    setTimeout(()=>{
+
+      console.log('wait...i am busy!');
+
+      resolve();
+    }, timeout);
   });
 };
 
 function* iAmGenerator() {
-  yield 'i am';
-  yield ' generator.';
-  return 'ending';
+  yield 'i';
+  yield 'am';
+  yield 'a';
+  yield 'generator';
+  return '.';
 }
 
 export default {
@@ -23,18 +32,28 @@ export default {
     whatIsTheGenerator(state) {
       console.log('what is the generator?');
       let me = iAmGenerator();
-      let flag = true;
+      let flag = false;
 
-      while(flag) {
+      while(!flag) {
         const obj = me.next();
         console.info(obj);
-        flag = !obj.done;
+        flag = obj.done;
       }
 
+      return state;
+    },
+    showUser(state, user) {
+      console.log(user);
       return state;
     }
   },
   effects: {
+    *add(action, { put, call }) {
+      if (typeof action.count === 'number') {
+        const { data } = yield call(()=>(request(`http://localhost:8000/api/users/${action.count}`)));
+        yield put({ type: 'showUser', ...data });
+      }
+    },
     *minus(action, { put, call }) {
       yield call(delay, 1000);
       yield put({ type: 'add' })

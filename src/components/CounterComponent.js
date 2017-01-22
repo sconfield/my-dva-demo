@@ -14,7 +14,7 @@ function CounterComponent(props) {
           </Col>
           <Col span={12} offset={4}>
             <Button type="primary" shape="circle" icon="plus-circle" size="large" key="add"
-              onClick={()=>{ props.dispatch({ type: 'counter/add' }) }} />
+              onClick={()=>{ props.dispatch({ type: 'counter/add', count: props.count + 1 }) }} />
             <Button shape="circle" icon="minus-circle" size="large" key="minus"
               onClick={()=>{ props.dispatch({ type: 'counter/minus' }) }} />
           </Col>
