@@ -20,6 +20,19 @@ function* iAmGenerator() {
   return '.';
 }
 
+let THING = true;
+function promiseThing(resolve, reject) {
+  console.log('to do promise thing.');
+
+  if(THING) {
+    resolve('success');
+  } else {
+    reject('fail');
+  }
+
+  THING = !THING;
+}
+
 export default {
   namespace: 'counter',
   state: 0,
@@ -42,6 +55,19 @@ export default {
       }
 
       return state;
+    },
+    whatIsThePromise(state) {
+      console.log('what is the promise?');
+
+      const promise = new Promise(promiseThing);
+
+      promise.then(msg=>{
+        console.log('just', msg, 'resolve-->then');
+      }).catch(msg=>{
+        console.log('error:', msg, 'reject-->catch');
+      });
+
+      return state
     },
     showUser(state, user) {
       console.log(user);
@@ -67,5 +93,5 @@ export default {
       key('up', () => { dispatch({ type:'add', count: 6 }) });
       key('down', () => { dispatch({ type:'minus' }) });
     }
-  },
+  }
 };

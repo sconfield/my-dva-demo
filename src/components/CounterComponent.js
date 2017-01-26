@@ -23,6 +23,9 @@ function CounterComponent(props) {
           <Button type="ghost" size="large" onClick={()=>{ props.dispatch({ type: 'counter/whatIsTheGenerator' }) }}>
             What is the generator?
           </Button>
+          <Button type="ghost" size="large" onClick={()=>{ props.dispatch({ type: 'counter/whatIsThePromise' }) }}>
+            What is the promise?
+          </Button>
         </Row>
       </Card>
     </div>
