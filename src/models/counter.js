@@ -1,4 +1,4 @@
-import request from '../utils/request.js';
+import * as userService from '../services/userService.js';
 import key from 'keymaster';
 
 const delay = timeout => {
@@ -52,7 +52,7 @@ export default {
     *add(action, { put, call }) {
       if (typeof action.count === 'number') {
         const url = `http://localhost:8000/api/users/${action.count}`;
-        const { data } = yield call(()=>(request(url)));
+        const { data } = yield call(()=>(userService.query(url)));
         yield put({ type: 'showUser', ...data });
       }
     },
