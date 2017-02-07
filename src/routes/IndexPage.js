@@ -14,6 +14,9 @@ function IndexPage() {
         <li>
           <Link to="/counter-route" activeClassName="active">show counter</Link>
         </li>
+        <li>
+          <Link to="/book-route" activeClassName="active">go to book store</Link>
+        </li>
       </ul>
     </div>
   );
