@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './CounterComponent.css';
 
-import { connect } from 'dva';
 import { Button, Icon, Card, Badge, Row, Col } from 'antd';
 
 function CounterComponent(props) {
@@ -32,10 +31,6 @@ function CounterComponent(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    count: state.counter
-  };
-}
+// this is a presentational component.
 
-export default connect(mapStateToProps)(CounterComponent);
+export default CounterComponent;

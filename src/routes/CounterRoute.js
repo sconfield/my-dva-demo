@@ -5,14 +5,22 @@ import styles from './CounterRoute.css';
 import CounterComponent from '../components/CounterComponent.js';
 import { Link } from 'dva/router';
 
-function CounterRoute() {
+function CounterRoute(props) {
   return (
     <div className={styles.normal}>
       <h1>Route Component: CounterRoute</h1>
-      <CounterComponent />
+      <CounterComponent { ...props } />
       <Link to="/" activeClassName="active">come back</Link>
     </div>
   );
 }
 
-export default CounterRoute;
+// this is a container component.
+
+function mapStateToProps(state) {
+  return {
+    count: state.counter
+  };
+}
+
+export default connect(mapStateToProps)(CounterRoute);
