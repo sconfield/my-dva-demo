@@ -5,6 +5,17 @@ import styles from './BookRoute.css';
 import { Link } from 'dva/router';
 
 function BookRoute(props) {
+  console.log(props.loading);
+  if(props.loading) {
+    return (
+      <div>
+        <h1>loading~</h1>
+        <h1>loading~</h1>
+        <h1>loading~</h1>
+      </div>
+    );
+  }
+
   const createLi = (item, idx)=>(
     <li key={idx}>{item.name}</li>
   );
@@ -19,7 +30,8 @@ function BookRoute(props) {
 
 function mapStateToProps(state) {
   return {
-    book: state.book
+    book: state.book,
+    loading: state.loading.models.book
   };
 }
 
