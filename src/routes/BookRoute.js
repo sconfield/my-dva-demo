@@ -5,8 +5,8 @@ import styles from './BookRoute.css';
 import { Link } from 'dva/router';
 
 function BookRoute(props) {
-  const createLi = (name, idx)=>(
-    <li key={idx}>{name}</li>
+  const createLi = (item, idx)=>(
+    <li key={idx}>{item.name}</li>
   );
   return (
     <div className={styles.normal}>
